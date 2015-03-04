@@ -28,11 +28,11 @@ class CalWindow < TkRoot
     @time = time
 
     resizable(false, false)
-    self["geometry"] = "500x500-0+0"
-    @bgcolor = "#101010"
-    self["background"] = @bgcolor
-
-    @font = TkFont.new(size: 15)
+    set_style
+    
+    self["geometry"] = @style[:geometry]
+    self["background"] = @style[:bgcolor]
+    @font = TkFont.new(size: @style[:fontsize])
 
     @cal_info_var = TkVariable.new
     var = @cal_info_var
@@ -40,9 +40,9 @@ class CalWindow < TkRoot
       textvariable var
     end
     @cal_info_label.grid(row: 0, column: 0, columnspan: 7)
-    @cal_info_label["foreground"] = "#EEEEEE"
+    @cal_info_label["foreground"] = @style[:fgcolor]
     @cal_info_label["font"] = @font
-    @cal_info_label["background"] = @bgcolor
+    @cal_info_label["background"] = @style[:bgcolor]
     
     @vars = (0..5).to_a.map do |i|
       (0..6).to_a.map do |j|
@@ -56,9 +56,9 @@ class CalWindow < TkRoot
         label = TkLabel.new(self) do
           textvariable var
         end
-        label.grid(row: i+1, column: j, padx: 10, pady: 10)
+        label.grid(row: i+1, column: j, padx: @style[:padx], pady: @style[:pady])
         label["font"] = @font
-        label["background"] = @bgcolor
+        label["background"] = @style[:bgcolor]
         label
       end
     end
@@ -80,6 +80,35 @@ class CalWindow < TkRoot
     set(time)
   end
 
+  def set_style
+    # default values
+    
+    @style = {
+      geometry: "500x500-0+0",
+      fontsize: 15,
+      bgcolor: "#101010",
+      fgcolor: "#C0C0C0",
+      todayfgcolor: "white",
+      todaybgcolor: "#101010",
+      padx: 10,
+      pady: 10
+    }
+
+    
+    rc_filename = File.join(ENV["HOME"], ".caltkrc")
+    if FileTest.exists?(rc_filename)
+      text = File.read(rc_filename)
+      text.split("\n").each do |line|
+        parts = line.split(/\W*:\W*/)
+        if parts.length >= 2
+          if @style[parts[0]]
+            @style[parts[0]] = parts[1]
+          end
+        end
+      end
+    end
+  end
+
   def set(time)
     cal = Cal.new(time.year, time.month)
     @cal_info_var.value = cal.info
@@ -95,9 +124,11 @@ class CalWindow < TkRoot
         label = ((@labels[i])[j])
         now = Time.now
         if now.year == time.year and now.mon == time.mon and data.to_i == now.mday
-          label["foreground"] = "white"
+          label["foreground"] = @style[:todayfgcolor]
+          label["background"] = @style[:todaybgcolor]
         else
-          label["foreground"] = "#AAAAAA"
+          label["foreground"] = @style[:fgcolor]
+          label["background"] = @style[:bgcolor]
         end
       end
     end
