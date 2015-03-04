@@ -37,7 +37,7 @@ todayfgcolor: red
 fontsize: 12
 padx: 5
 pady: 5
-geometry: 350x350-0+0
+geometry: 350x400-0+0
 ```
 
-This style sets the background of the calendar to the color defined by #121030, and foreground to white. If today is on the calendar shown, it will appear in red color. The font size is set as 12 and paddings for the labels that show days are 5 for both x and y axes. The calendar window size is set as 350 by 350, and the window is placed on the top right corner of the screen.
+This style sets the background of the calendar to the color defined by #121030, and foreground to white. If today is on the calendar shown, it will appear in red color. The font size is set as 12 and paddings for the labels that show days are 5 for both x and y axes. The calendar window size is set as 350 (width) by 400 (height), and the window is placed on the top (+0) right (-0) corner of the screen.
