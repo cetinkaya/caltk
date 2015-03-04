@@ -15,7 +15,7 @@ or
 caltk 3 2015
 ```
 
-If only one argument is provided it is considered as the month of current year. Since it is March 2015 at the moment, 
+If only one argument is provided, it is considered as the month of current year. Since it is March 2015 at the moment, 
 
 ```
 caltk 3
