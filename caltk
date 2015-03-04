@@ -99,7 +99,7 @@ class CalWindow < TkRoot
     if FileTest.exists?(rc_filename)
       text = File.read(rc_filename)
       text.split("\n").each do |line|
-        parts = line.split(/\W*:\W*/)
+        parts = line.split(/\s*:\s*/)
         if parts.length >= 2
           if @style[parts[0].to_sym]
             @style[parts[0].to_sym] = parts[1]
