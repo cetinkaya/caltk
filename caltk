@@ -101,8 +101,8 @@ class CalWindow < TkRoot
       text.split("\n").each do |line|
         parts = line.split(/\W*:\W*/)
         if parts.length >= 2
-          if @style[parts[0]]
-            @style[parts[0]] = parts[1]
+          if @style[parts[0].to_sym]
+            @style[parts[0].to_sym] = parts[1]
           end
         end
       end
