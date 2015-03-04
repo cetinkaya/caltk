@@ -44,13 +44,13 @@ class CalWindow < TkRoot
     @cal_info_label["font"] = @font
     @cal_info_label["background"] = @style[:bgcolor]
     
-    @vars = (0..5).to_a.map do |i|
+    @vars = (0..6).to_a.map do |i|
       (0..6).to_a.map do |j|
         var = TkVariable.new
         var
       end
     end
-    @labels = (0..5).to_a.map do |i|
+    @labels = (0..6).to_a.map do |i|
       (0..6).to_a.map do |j|
         var = (@vars[i])[j]
         label = TkLabel.new(self) do
@@ -112,7 +112,7 @@ class CalWindow < TkRoot
   def set(time)
     cal = Cal.new(time.year, time.month)
     @cal_info_var.value = cal.info
-    (0..5).to_a.map do |i|
+    (0..6).to_a.map do |i|
       (0..6).to_a.map do |j|
         ((@vars[i])[j]).value = "  "
       end
@@ -142,7 +142,7 @@ class Cal
   def initialize(year, month)
     lines = `cal #{month} #{year}`.split("\n")
     @info = lines[0].strip
-    @table = lines[1..lines.length-2].map.with_index do |line, index|
+    @table = lines[1..lines.length-1].map.with_index do |line, index|
       parts = line.strip.split(/\W+/)
       if index == 1
         # fill front
