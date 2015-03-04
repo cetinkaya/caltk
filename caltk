@@ -56,7 +56,8 @@ class CalWindow < TkRoot
         label = TkLabel.new(self) do
           textvariable var
         end
-        label.grid(row: i+1, column: j, padx: @style[:padx], pady: @style[:pady])
+        label.grid(row: i+1, column: j,
+                   padx: @style[:padx], pady: @style[:pady])
         label["font"] = @font
         label["background"] = @style[:bgcolor]
         label
@@ -81,8 +82,7 @@ class CalWindow < TkRoot
   end
 
   def set_style
-    # default values
-    
+    # default values for the style
     @style = {
       geometry: "500x500-0+0",
       fontsize: 15,
@@ -93,7 +93,6 @@ class CalWindow < TkRoot
       padx: 10,
       pady: 10
     }
-
     
     rc_filename = File.join(ENV["HOME"], ".caltkrc")
     if FileTest.exists?(rc_filename)
