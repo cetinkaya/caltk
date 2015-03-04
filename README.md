@@ -1,5 +1,5 @@
 # caltk
-caltk is a simple Tk application that shows monthly calendars. It requires *cal* tool. 
+caltk is a simple Tk application that shows monthly calendars. It requires *cal* tool and Ruby with Tk support. 
 
 ### Example usage
 
