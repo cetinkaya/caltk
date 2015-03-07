@@ -84,7 +84,7 @@ class CalWindow < TkRoot
   def set_style
     # default values for the style
     @style = {
-      geometry: "500x560-0+0",
+      geometry: "-0+0",
       fontsize: 15,
       bgcolor: "#101010",
       fgcolor: "#C0C0C0",
