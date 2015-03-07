@@ -43,6 +43,8 @@ class CalWindow < TkRoot
     @cal_info_label["foreground"] = @style[:fgcolor]
     @cal_info_label["font"] = @font
     @cal_info_label["background"] = @style[:bgcolor]
+    @cal_info_label["padx"] = @style[:padx]
+    @cal_info_label["pady"] = @style[:pady]
     
     @vars = (0..6).to_a.map do |i|
       (0..6).to_a.map do |j|
